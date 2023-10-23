@@ -4,40 +4,44 @@ import (
 	"fmt"
 )
 
-type singleton struct {
+type rating struct {
 	num int
 }
 
-var singleInstance *singleton
+var singleInstance *rating
 
-func getInstance() *singleton {
+func getInstance() *rating {
 	if singleInstance == nil {
 		fmt.Println("Creating single instance")
-		singleInstance = &singleton{0}
+		singleInstance = &rating{0}
 	} else {
 		fmt.Println("Instance alredy exists - returning it")
 	}
 	return singleInstance
 }
 
-func (s *singleton) addOne() {
-	s.num += 1
+func (r *rating) upvote() {
+	r.num += 1
 }
 
-func (s *singleton) showNum() {
-	fmt.Println(s.num)
+func (r *rating) downvote() {
+	r.num -= 1
+}
+
+func (r *singleton) showRating() {
+	fmt.Println(r.num)
 }
 
 func main() {
-	s1 := getInstance()
-	s1.showNum()
-	s1.addOne()
-	s1.showNum()
+	r1 := getInstance()
+	r1.showRating()
+	r1.upvote()
+	r1.showRating()
 
-	s2 := getInstance()
-	s2.showNum()
-	s2.addOne()
-	s2.showNum()
+	r2 := getInstance()
+	r2.showRating()
+	r2.upvote()
+	r2.showRating()
 
-	fmt.Println(s1 == s2)
+	fmt.Println(r1 == r2)
 }
